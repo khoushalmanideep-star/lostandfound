@@ -1,0 +1,147 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #0a0a0a;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --card-foreground: #0a0a0a;
+  --border: rgba(15, 23, 42, 0.10);
+  --ring: rgba(79, 70, 229, 0.35);
+
+  --radius: 16px;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #07070a;
+    --foreground: #f4f4f5;
+    --muted: #a1a1aa;
+    --card: #0b0b10;
+    --card-foreground: #f4f4f5;
+    --border: rgba(255, 255, 255, 0.10);
+    --ring: rgba(129, 140, 248, 0.40);
+  }
+}
+
+body {
+  background: radial-gradient(900px 500px at 20% 0%, rgba(99, 102, 241, 0.12), transparent 60%),
+    radial-gradient(800px 520px at 90% 15%, rgba(16, 185, 129, 0.10), transparent 55%), var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+    "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+@layer base {
+  * {
+    @apply border-zinc-200/70 dark:border-white/10;
+  }
+
+  ::selection {
+    background: rgba(79, 70, 229, 0.22);
+  }
+}
+
+@layer components {
+  .saas-card {
+    @apply rounded-3xl border bg-white/80 shadow-sm backdrop-blur-sm dark:bg-zinc-900/60;
+  }
+
+  .saas-card-hover {
+    @apply transition hover:-translate-y-0.5 hover:shadow-md;
+  }
+
+  .saas-stat {
+    @apply rounded-2xl border bg-white/70 p-5 shadow-sm backdrop-blur-sm transition
+      hover:-translate-y-0.5 hover:shadow-md
+      dark:bg-zinc-900/50;
+  }
+
+  .saas-gradient-border {
+    background:
+      linear-gradient(var(--background), var(--background)) padding-box,
+      linear-gradient(135deg, rgba(99, 102, 241, 0.55), rgba(16, 185, 129, 0.35)) border-box;
+    border: 1px solid transparent;
+    border-radius: 24px;
+  }
+
+  .saas-btn-primary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40 disabled:cursor-not-allowed disabled:opacity-60
+      bg-zinc-900 text-white hover:bg-zinc-700 dark:bg-zinc-100 dark:text-zinc-900 dark:hover:bg-zinc-300;
+  }
+
+  .saas-btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-medium transition
+      focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500/40 disabled:cursor-not-allowed disabled:opacity-60
+      border border-zinc-300 bg-white hover:bg-zinc-100 dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800;
+  }
+
+  .saas-input {
+    @apply w-full rounded-xl border border-zinc-300 bg-white px-3 py-2 text-sm shadow-sm
+      outline-none transition focus:border-indigo-300 focus:ring-2 focus:ring-indigo-500/15
+      dark:border-zinc-700 dark:bg-zinc-900 dark:focus:border-indigo-500/50;
+  }
+
+  .saas-badge {
+    @apply inline-flex items-center rounded-full border px-2.5 py-1 text-xs font-medium
+      border-zinc-200 bg-zinc-50 text-zinc-700 dark:border-zinc-700 dark:bg-zinc-800/60 dark:text-zinc-200;
+  }
+
+  .loading-word-cycle {
+    @apply relative inline-block min-w-[9ch] text-zinc-900 dark:text-zinc-100;
+  }
+
+  .loading-word {
+    @apply absolute inset-0 opacity-0;
+    animation: loadingWordFade 2.4s infinite;
+  }
+
+  .loading-word:nth-child(1) {
+    animation-delay: 0s;
+  }
+  .loading-word:nth-child(2) {
+    animation-delay: 0.6s;
+  }
+  .loading-word:nth-child(3) {
+    animation-delay: 1.2s;
+  }
+  .loading-word:nth-child(4) {
+    animation-delay: 1.8s;
+  }
+}
+
+@keyframes loadingWordFade {
+  0% {
+    opacity: 0;
+    transform: translateY(6px);
+    filter: blur(2px);
+  }
+  12% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  35% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+  50% {
+    opacity: 0;
+    transform: translateY(-6px);
+    filter: blur(2px);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-6px);
+    filter: blur(2px);
+  }
+}
